@@ -57,11 +57,17 @@ def read_photo(photos: list[Path], effort: str = "low") -> dict:
     return out
 
 
-def read_staff(text: str, items: list[dict]) -> dict:
+def read_staff(text: str, items: list[dict], photo: dict | None = None) -> dict:
+    content = [{"type": "input_text", "text": staff_prompt(items)}]
+    if photo and photo.get("items"):
+        # Staff say "top" and "bottom"; the photo knows it is a kurta and a pyjama.
+        seen = ", ".join(f"{i.get('count')} {i.get('garment')}" for i in photo["items"])
+        content.append({"type": "input_text", "text":
+            f"THE PHOTO SHOWS: {seen}.\nWhen staff use a general word (top, bottom, set, dress, cloth, item), "
+            "take the garment from the photo. Counts and services still come only from what staff said."})
+    content.append({"type": "input_text", "text": "STAFF SAID: " + text})
     resp, _ = post("/responses", {"model": MODEL, "reasoning": {"effort": "low"}, "max_output_tokens": 4000,
-                                  "input": [{"type": "message", "role": "user", "content": [
-                                      {"type": "input_text", "text": staff_prompt(items)},
-                                      {"type": "input_text", "text": "STAFF SAID: " + text}]}]})
+                                  "input": [{"type": "message", "role": "user", "content": content}]})
     return _json(response_text(resp))
 
 

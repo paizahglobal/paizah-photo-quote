@@ -14,14 +14,15 @@ def build_reply(photos: list[Path], words: str, work: Path) -> tuple[str, bytes,
     items = load_pricelist(BRAND)
     started = time.time()
     photo = read_photo(photos)
-    staff = read_staff(words, items)
+    staff = read_staff(words, items, photo)
     draft = reconcile(staff.get("lines", []), photo, items)
     secs = time.time() - started
     customer = staff.get("customer_phone")
-    head = f"Customer {customer}\n" if customer else "No customer number heard.\n"
+    head = f"Customer {customer}\n" if customer else "No customer number heard. Send it as a reply.\n"
     text = head + staff_message(draft) + f"\n({secs:.0f} s)"
 
-    garments = [c.garment for c in draft.checks if c.seen] or ["garment"]
+    # Each garment by its own name first, then "garment" to box whatever those missed.
+    garments = [c.garment for c in draft.checks if c.seen] + ["garment"]
     out = work / f"{photos[0].stem}-counted.jpg"
     counts = counted_photo(photos[0], garments, out)
     caption = "Counted at the counter: " + ", ".join(f"{n} {g}" for g, n in counts.items())

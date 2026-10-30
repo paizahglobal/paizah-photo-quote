@@ -38,6 +38,7 @@ ALLOWED = {n.strip() for n in os.environ.get("ALLOWED_NUMBERS", "").split(",") i
 WORK = Path(tempfile.gettempdir()) / "lots"
 
 held: dict[str, list[tuple[float, Path]]] = {}   # sender -> photos waiting for their words
+last: dict[str, tuple[float, list[Path], str]] = {}  # sender -> the lot just quoted, for follow-ups
 seen_ids: set[str] = set()
 jobs: "queue.Queue[dict]" = queue.Queue()
 lock = threading.Lock()
@@ -49,6 +50,8 @@ def take_photos(sender: str) -> list[Path]:
 
 
 def quote_lot(sender: str, photos: list[Path], words: str) -> None:
+    with lock:
+        last[sender] = (time.time(), photos, words)
     if RELAY:
         jobs.put({"sender": sender, "words": words,
                   "photos": [base64.b64encode(p.read_bytes()).decode() for p in photos]})
@@ -83,10 +86,16 @@ def handle(msg: dict) -> None:
             whatsapp.send_text(sender, "Photo received. Now say what is in it, with the customer's number.")
     elif kind == "text":
         photos = take_photos(sender)
-        if not photos:
-            whatsapp.send_text(sender, "Send the photo of the lot first, then what is in it.")
+        if photos:
+            quote_lot(sender, photos, msg["text"]["body"])
             return
-        quote_lot(sender, photos, msg["text"]["body"])
+        # No new photo: a follow-up (the number, a correction) to the lot just quoted.
+        with lock:
+            prev = last.get(sender)
+        if prev and time.time() - prev[0] < HOLD_SECONDS:
+            quote_lot(sender, prev[1], prev[2] + "\nThen staff added: " + msg["text"]["body"])
+            return
+        whatsapp.send_text(sender, "Send the photo of the lot first, then what is in it.")
     elif kind == "audio":
         whatsapp.send_text(sender, "Voice notes are coming next. For now, type what is in the lot.")
 
