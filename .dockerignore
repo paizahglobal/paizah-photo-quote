@@ -5,3 +5,4 @@ eval/
 .wa_token
 .git/
 .verify_token
+run_worker.sh
