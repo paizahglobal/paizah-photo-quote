@@ -5,3 +5,5 @@ eval/results/
 __pycache__/
 .DS_Store
 .venv/
+.wa_token
+.verify_token

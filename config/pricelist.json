@@ -1,0 +1,370 @@
+[
+ {
+  "item_id": "2784605000019287614",
+  "name": "PREZR SP HOODIE",
+  "brand": "prezr",
+  "garment": "hoodie",
+  "service": "SP",
+  "rate": 30
+ },
+ {
+  "item_id": "2784605000010027037",
+  "name": "PREZR VZD_Pick up & Delivery Charges 3 km",
+  "brand": "prezr",
+  "garment": null,
+  "service": "DLV",
+  "rate": 60
+ },
+ {
+  "item_id": "2784605000010027032",
+  "name": "PREZR VZD_Pick up & Delivery Charges 5 km (Below O.V 499)",
+  "brand": "prezr",
+  "garment": null,
+  "service": "DLV",
+  "rate": 80
+ },
+ {
+  "item_id": "2784605000021996196",
+  "name": "PREZR_SP_Bedsheet Double/Queen",
+  "brand": "prezr",
+  "garment": "bedsheet",
+  "service": "SP",
+  "rate": 70
+ },
+ {
+  "item_id": "2784605000000736671",
+  "name": "PREZR_SP_Kurta (Short)",
+  "brand": "prezr",
+  "garment": "kurta",
+  "service": "SP",
+  "rate": 21
+ },
+ {
+  "item_id": "2784605000000779125",
+  "name": "PREZR_SP_Saree (Silk)",
+  "brand": "prezr",
+  "garment": "saree",
+  "service": "SP",
+  "rate": 90
+ },
+ {
+  "item_id": "2784605000000701165",
+  "name": "PREZR_SW / DC_ Doctors Coats",
+  "brand": "prezr",
+  "garment": "coat",
+  "service": "DC",
+  "rate": 150
+ },
+ {
+  "item_id": "2784605000000741957",
+  "name": "PREZR_SW / DC_Kurta ( short )",
+  "brand": "prezr",
+  "garment": "kurta",
+  "service": "DC",
+  "rate": 90
+ },
+ {
+  "item_id": "2784605000000736979",
+  "name": "PREZR_SW / DC_Saree (Delicate)",
+  "brand": "prezr",
+  "garment": "saree",
+  "service": "DC",
+  "rate": 300
+ },
+ {
+  "item_id": "2784605000000736990",
+  "name": "PREZR_SW / DC_Saree (Silk)",
+  "brand": "prezr",
+  "garment": "saree",
+  "service": "DC",
+  "rate": 250
+ },
+ {
+  "item_id": "2784605000020609734",
+  "name": "PREZR_SW/DC_BLOUSE_DEL (KIDS)",
+  "brand": "prezr",
+  "garment": "blouse",
+  "service": "DC",
+  "rate": 100
+ },
+ {
+  "item_id": "2784605000000401801",
+  "name": "Prezr_ DC_Pyjama (Cotton)",
+  "brand": "prezr",
+  "garment": "pyjama",
+  "service": "DC",
+  "rate": 100
+ },
+ {
+  "item_id": "2784605000000416620",
+  "name": "Prezr_DC_Trouser / Pants",
+  "brand": "prezr",
+  "garment": "trouser",
+  "service": "DC",
+  "rate": 130
+ },
+ {
+  "item_id": "2784605000000344896",
+  "name": "Prezr_Laundry by weight (per kg )",
+  "brand": "prezr",
+  "garment": null,
+  "service": "KG",
+  "rate": 99
+ },
+ {
+  "item_id": "2784605000007444534",
+  "name": "Prezr_SP_ T-shirt (Long Sleeve)",
+  "brand": "prezr",
+  "garment": "t-shirt",
+  "service": "SP",
+  "rate": 22
+ },
+ {
+  "item_id": "2784605000000427001",
+  "name": "Prezr_SP_ T-shirt (Regular)",
+  "brand": "prezr",
+  "garment": "t-shirt",
+  "service": "SP",
+  "rate": 18
+ },
+ {
+  "item_id": "2784605000000343455",
+  "name": "Prezr_SP_Blouse (Regular)",
+  "brand": "prezr",
+  "garment": "blouse",
+  "service": "SP",
+  "rate": 15
+ },
+ {
+  "item_id": "2784605000000344159",
+  "name": "Prezr_SP_Dhoti / Mundu (Regular)",
+  "brand": "prezr",
+  "garment": "dhoti / mundu",
+  "service": "SP",
+  "rate": 40
+ },
+ {
+  "item_id": "2784605000000344731",
+  "name": "Prezr_SP_Jeans",
+  "brand": "prezr",
+  "garment": "jeans",
+  "service": "SP",
+  "rate": 28
+ },
+ {
+  "item_id": "2784605000007444477",
+  "name": "Prezr_SP_Kurta (Anarkali)",
+  "brand": "prezr",
+  "garment": "kurta",
+  "service": "SP",
+  "rate": 55
+ },
+ {
+  "item_id": "2784605000000416270",
+  "name": "Prezr_SP_Kurta (Long)",
+  "brand": "prezr",
+  "garment": "kurta",
+  "service": "SP",
+  "rate": 25
+ },
+ {
+  "item_id": "2784605000000416247",
+  "name": "Prezr_SP_Pyjama",
+  "brand": "prezr",
+  "garment": "pyjama",
+  "service": "SP",
+  "rate": 22
+ },
+ {
+  "item_id": "2784605000000416236",
+  "name": "Prezr_SP_Saree (Cotton)",
+  "brand": "prezr",
+  "garment": "saree",
+  "service": "SP",
+  "rate": 60
+ },
+ {
+  "item_id": "2784605000007444510",
+  "name": "Prezr_SP_Shawl / Stole (Large)",
+  "brand": "prezr",
+  "garment": "shawl / stole",
+  "service": "SP",
+  "rate": 28
+ },
+ {
+  "item_id": "2784605000000416191",
+  "name": "Prezr_SP_Shirt",
+  "brand": "prezr",
+  "garment": "shirt",
+  "service": "SP",
+  "rate": 20
+ },
+ {
+  "item_id": "2784605000000416225",
+  "name": "Prezr_SP_Trouser/Pant",
+  "brand": "prezr",
+  "garment": "trouser",
+  "service": "SP",
+  "rate": 25
+ },
+ {
+  "item_id": "2784605000000416071",
+  "name": "Prezr_SW / DC_ Shirt ( cotton)",
+  "brand": "prezr",
+  "garment": "shirt",
+  "service": "DC",
+  "rate": 120
+ },
+ {
+  "item_id": "2784605000000343829",
+  "name": "Prezr_SW / DC_Bed Sheet (Double/Queen/King)",
+  "brand": "prezr",
+  "garment": "bedsheet",
+  "service": "DC",
+  "rate": 245
+ },
+ {
+  "item_id": "2784605000000343818",
+  "name": "Prezr_SW / DC_Bed Sheet (Single)",
+  "brand": "prezr",
+  "garment": "bedsheet",
+  "service": "DC",
+  "rate": 180
+ },
+ {
+  "item_id": "2784605000000343807",
+  "name": "Prezr_SW / DC_Blanket (Double/Queen/King)",
+  "brand": "prezr",
+  "garment": "blanket",
+  "service": "DC",
+  "rate": 410
+ },
+ {
+  "item_id": "2784605000000343554",
+  "name": "Prezr_SW / DC_Blouse (Regular)",
+  "brand": "prezr",
+  "garment": "blouse",
+  "service": "DC",
+  "rate": 100
+ },
+ {
+  "item_id": "2784605000000344269",
+  "name": "Prezr_SW / DC_Dhoti / Mundu (Cotton)",
+  "brand": "prezr",
+  "garment": "dhoti / mundu",
+  "service": "DC",
+  "rate": 130
+ },
+ {
+  "item_id": "2784605000000344555",
+  "name": "Prezr_SW / DC_Frock (Kids)",
+  "brand": "prezr",
+  "garment": "frock",
+  "service": "DC",
+  "rate": 150
+ },
+ {
+  "item_id": "2784605000000344764",
+  "name": "Prezr_SW / DC_Jeans",
+  "brand": "prezr",
+  "garment": "jeans",
+  "service": "DC",
+  "rate": 140
+ },
+ {
+  "item_id": "2784605000000429067",
+  "name": "Prezr_SW / DC_Kurta (Regular)",
+  "brand": "prezr",
+  "garment": "kurta",
+  "service": "DC",
+  "rate": 130
+ },
+ {
+  "item_id": "2784605000000416802",
+  "name": "Prezr_SW / DC_Saree (Regular)",
+  "brand": "prezr",
+  "garment": "saree",
+  "service": "DC",
+  "rate": 200
+ },
+ {
+  "item_id": "2784605000000736990",
+  "name": "Prezr_SW / DC_Saree (Silk)",
+  "brand": "prezr",
+  "garment": "saree",
+  "service": "DC",
+  "rate": 270
+ },
+ {
+  "item_id": "2784605000020889041",
+  "name": "Prezr_W & SP_Bedsheet(Double/Queen/King)",
+  "brand": "prezr",
+  "garment": "bedsheet",
+  "service": "W&SP",
+  "rate": 260
+ },
+ {
+  "item_id": "2784605000000344225",
+  "name": "Prezr_W & SP_Dhoti / Mundu (Regular)",
+  "brand": "prezr",
+  "garment": "dhoti / mundu",
+  "service": "W&SP",
+  "rate": 70
+ },
+ {
+  "item_id": "2784605000000344753",
+  "name": "Prezr_W & SP_Jeans",
+  "brand": "prezr",
+  "garment": "jeans",
+  "service": "W&SP",
+  "rate": 70
+ },
+ {
+  "item_id": "2784605000000409028",
+  "name": "Prezr_W & SP_Shirt(Regular)",
+  "brand": "prezr",
+  "garment": "shirt",
+  "service": "W&SP",
+  "rate": 60
+ },
+ {
+  "item_id": "2784605000000409015",
+  "name": "Prezr_W & SP_T Shirt",
+  "brand": "prezr",
+  "garment": "t-shirt",
+  "service": "W&SP",
+  "rate": 65
+ },
+ {
+  "item_id": "2784605000000401736",
+  "name": "Prezr_W & SP_Trouser / Pants",
+  "brand": "prezr",
+  "garment": "trouser",
+  "service": "W&SP",
+  "rate": 80
+ },
+ {
+  "item_id": "2784605000020889057",
+  "name": "Prezr_W&F_Bedsheet (Double/Queen/King)",
+  "brand": "prezr",
+  "garment": "bedsheet",
+  "service": "W&F",
+  "rate": 210
+ },
+ {
+  "item_id": "2784605000000343631",
+  "name": "Prezr_W&F_Blanket (Double/Queen/King)",
+  "brand": "prezr",
+  "garment": "blanket",
+  "service": "W&F",
+  "rate": 100
+ },
+ {
+  "item_id": "2784605000016214540",
+  "name": "Starching (Medium) Small peices",
+  "brand": "prezr",
+  "garment": null,
+  "service": "STR",
+  "rate": 20
+ }
+]

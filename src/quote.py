@@ -140,7 +140,7 @@ def staff_message(d: Draft) -> str:
 
 
 def load_pricelist(brand: str) -> list[dict]:
-    items = json.loads((ROOT / "data" / "pricelist.json").read_text())
+    items = json.loads((ROOT / "config" / "pricelist.json").read_text())
     return [i for i in items if i["brand"] == brand]
 
 

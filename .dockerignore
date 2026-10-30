@@ -1,0 +1,7 @@
+data/
+eval/
+.venv/
+.meta_key
+.wa_token
+.git/
+.verify_token
