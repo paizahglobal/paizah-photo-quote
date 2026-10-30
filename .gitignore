@@ -1,0 +1,6 @@
+.meta_key
+.env
+data/
+eval/results/
+__pycache__/
+.DS_Store
