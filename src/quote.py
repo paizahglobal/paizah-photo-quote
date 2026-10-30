@@ -22,6 +22,7 @@ PHOTO_PROMPT = f"""You are the intake desk of a laundry in Kerala, India. The ph
 Count every piece. A pair of shoes is one piece. Folded or stacked pieces count separately; look at edges and collars to separate a stack.
 Use only these garment names: {", ".join(GARMENTS)}, other.
 A dhoti or mundu is a white or cream unstitched cloth, often with a gold or coloured border. A kurta is a long tunic, longer than a shirt.
+A folded bedsheet is thin flat cotton, often printed, and looks bulky only because it is folded many times; a blanket or quilt is thick, padded or fleecy. If you cannot tell them apart, say bedsheet with low confidence.
 If some pieces are hidden (inside a bag, under others), say so.
 Reply with JSON only, no prose:
 {{"items": [{{"garment": "<name>", "count": <int>, "confidence": <0..1>}}], "total": <int>, "all_visible": <true|false>}}"""

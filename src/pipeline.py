@@ -21,9 +21,9 @@ def build_reply(photos: list[Path], words: str, work: Path) -> tuple[str, bytes,
     head = f"Customer {customer}\n" if customer else "No customer number heard. Send it as a reply.\n"
     text = head + staff_message(draft) + f"\n({secs:.0f} s)"
 
-    # Each garment by its own name first, then "garment" to box whatever those missed.
-    garments = [c.garment for c in draft.checks if c.seen] + ["garment"]
+    # The picture shows what the photo reading counted, no more.
+    expected = {c.garment: c.seen for c in draft.checks if c.seen}
     out = work / f"{photos[0].stem}-counted.jpg"
-    counts = counted_photo(photos[0], garments, out)
+    counts = counted_photo(photos[0], expected, out)
     caption = "Counted at the counter: " + ", ".join(f"{n} {g}" for g, n in counts.items())
     return text, out.read_bytes(), caption
