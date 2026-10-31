@@ -31,6 +31,14 @@ def download_media(media_id: str) -> bytes:
         return r.read()
 
 
+def mark_read_typing(message_id: str) -> None:
+    """Blue ticks, and "typing…" in the chat until the reply or 25 seconds."""
+    _call("POST", f"{GRAPH}/{_phone_id()}/messages", json.dumps({
+        "messaging_product": "whatsapp", "status": "read", "message_id": message_id,
+        "typing_indicator": {"type": "text"},
+    }).encode(), "application/json")
+
+
 def send_text(to: str, text: str) -> None:
     _call("POST", f"{GRAPH}/{_phone_id()}/messages", json.dumps({
         "messaging_product": "whatsapp", "to": to, "type": "text", "text": {"body": text[:4096]},

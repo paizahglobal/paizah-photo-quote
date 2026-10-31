@@ -49,12 +49,26 @@ def take_photos(sender: str) -> list[Path]:
         return [p for t, p in held.pop(sender, []) if time.time() - t < HOLD_SECONDS]
 
 
+PICKUP_SECONDS = 45
+picked: set[str] = set()   # job ids a worker has collected
+
+
+def _warn_if_not_picked(sender: str, job_id: str) -> None:
+    time.sleep(PICKUP_SECONDS)
+    if job_id not in picked:
+        whatsapp.send_text(sender, "The reader is offline right now. The quote will come when it is back.")
+
+
 def quote_lot(sender: str, photos: list[Path], words: str) -> None:
     with lock:
         last[sender] = (time.time(), photos, words)
+    n = len(photos)
+    whatsapp.send_text(sender, f"Got it: {n} photo{'s' if n > 1 else ''}. Reading the lot, about 15 seconds.")
     if RELAY:
-        jobs.put({"sender": sender, "words": words,
+        job_id = f"{time.time_ns()}"
+        jobs.put({"id": job_id, "sender": sender, "words": words,
                   "photos": [base64.b64encode(p.read_bytes()).decode() for p in photos]})
+        threading.Thread(target=_warn_if_not_picked, args=(sender, job_id), daemon=True).start()
         return
     from pipeline import build_reply
     text, jpeg, caption = build_reply(photos, words, WORK)
@@ -69,6 +83,10 @@ def handle(msg: dict) -> None:
     seen_ids.add(msg.get("id"))
     if ALLOWED and sender not in ALLOWED:
         return
+    try:
+        whatsapp.mark_read_typing(msg["id"])
+    except Exception:
+        traceback.print_exc()   # a missing tick must not stop the quote
     kind = msg.get("type")
     if kind == "image":
         WORK.mkdir(parents=True, exist_ok=True)
@@ -141,6 +159,7 @@ class Handler(BaseHTTPRequestHandler):
                 job = jobs.get(timeout=25)
             except queue.Empty:
                 return self._reply(204)
+            picked.add(job["id"])
             return self._reply(200, json.dumps(job).encode(), "application/json")
         return self._reply(403, b"forbidden")
 
