@@ -27,6 +27,14 @@ If some pieces are hidden (inside a bag, under others), say so.
 Reply with JSON only, no prose:
 {{"items": [{{"garment": "<name>", "count": <int>, "confidence": <0..1>}}], "total": <int>, "all_visible": <true|false>}}"""
 
+DAMAGE_PROMPT = """You are the intake desk of a laundry in Kerala, India, checking a customer's lot BEFORE washing, so that existing damage is recorded and the laundry is not blamed for it later.
+Look at every piece for: stain, discolouration, fading, tear, hole, missing button, broken zip, loose seam, burn mark.
+Report only what you can actually see. Creases, folds, shadows, prints, embroidery, checks and designs are NOT damage.
+Pieces photographed folded show only part of the garment; say so in "not_checked" rather than guessing about what is hidden.
+Reply with JSON only:
+{"issues": [{"piece": "<colour and garment, e.g. grey striped shirt>", "garment": "<garment>", "issue": "<stain|discolouration|fading|tear|hole|missing button|broken zip|loose seam|burn mark>", "where": "<where on the piece>", "confidence": <0..1>}],
+ "not_checked": "<what could not be seen, or empty>"}"""
+
 SERVICES = {"SP": "steam press", "DC": "dry clean", "W&SP": "wash and steam press", "W&F": "wash and fold",
             "SC": "shoe or bag cleaning", "STR": "starch", "KG": "laundry by weight", "DLV": "pickup and delivery"}
 
@@ -55,6 +63,17 @@ def read_photo(photos: list[Path], effort: str = "low") -> dict:
                                      "input": [{"type": "message", "role": "user", "content": content}]})
     out = _json(response_text(resp))
     out["secs"] = round(secs, 1)
+    return out
+
+
+def read_damage(photos: list[Path]) -> dict:
+    """Stains, tears and the like, recorded before washing. Low-confidence findings are dropped."""
+    content = [{"type": "input_text", "text": DAMAGE_PROMPT}]
+    content += [{"type": "input_image", "image_url": image_data_url(p)} for p in photos]
+    resp, _ = post("/responses", {"model": MODEL, "reasoning": {"effort": "low"}, "max_output_tokens": 6000,
+                                  "input": [{"type": "message", "role": "user", "content": content}]})
+    out = _json(response_text(resp))
+    out["issues"] = [i for i in out.get("issues", []) if float(i.get("confidence") or 0) >= 0.6]
     return out
 
 
@@ -133,7 +152,8 @@ def staff_message(d: Draft) -> str:
     seen_total = sum(c.seen for c in d.checks)
     rows = [f"{l['quantity']:g} x {l['name']} @ Rs {l['rate']:g} = Rs {l['total']:g}" for l in d.lines]
     if not d.needs_staff:
-        return f"Photo agrees: {seen_total} pieces.\n" + "\n".join(rows) + f"\nTotal Rs {d.total:g}. Sending to the customer."
+        pieces = f"{seen_total} piece{'' if seen_total == 1 else 's'}"
+        return f"Photo agrees: {pieces}.\n" + "\n".join(rows) + f"\nTotal Rs {d.total:g}. Ready to send to the customer."
     out = []
     if seen_total < said_total:
         out.append(f"You said {said_total} pieces, the photo shows {seen_total}. Send a photo of the rest, or correct the count.")
