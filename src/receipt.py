@@ -34,7 +34,8 @@ def _overlap(a, b) -> float:
     return inter / small if small else 0
 
 
-def counted_photo(photo: Path, expected: dict[str, int], out: Path, min_conf: float = 0.5) -> dict[str, int]:
+def counted_photo(photo: Path, expected: dict[str, int], out: Path, min_conf: float = 0.5,
+                  stains: int = 0) -> dict[str, int]:
     """Box each piece, never more boxes for a garment than the reading counted.
 
     ★ THE PICTURE MUST AGREE WITH THE QUOTE. On a real Luxe lot (30 Oct) SAM
@@ -73,5 +74,16 @@ def counted_photo(photo: Path, expected: dict[str, int], out: Path, min_conf: fl
         tw, th = draw.textbbox((0, 0), label, font=font)[2:]
         draw.rectangle((x - 4, y - 4, x + tw + 4, y + th + 8), fill=colour)
         draw.text((x, y), label, fill="white", font=font)
+    if stains:
+        # Only when the reading saw a stain: SAM alone also finds shadows and prints.
+        for b in boxes(photo, "stain"):
+            if b[4] < 0.4:
+                continue
+            counts["stain"] = counts.get("stain", 0) + 1
+            draw.ellipse(b[:4], outline="#ff0000", width=max(6, img.width // 160))
+            x, y = b[0] + 8, b[3] - font.size - 16
+            tw, th = draw.textbbox((0, 0), "stain", font=font)[2:]
+            draw.rectangle((x - 4, y - 4, x + tw + 4, y + th + 8), fill="#ff0000")
+            draw.text((x, y), "stain", fill="white", font=font)
     img.save(out, quality=85)
     return counts
