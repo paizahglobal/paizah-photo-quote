@@ -38,7 +38,8 @@ def run_one(job: dict) -> None:
         photos.append(p)
     try:
         text, jpeg, caption = build_reply(photos, job["words"], WORK)
-        _post({"sender": job["sender"], "text": text, "image": base64.b64encode(jpeg).decode(), "caption": caption})
+        _post({"sender": job["sender"], "text": text,
+               "image": base64.b64encode(jpeg).decode() if jpeg else None, "caption": caption})
     except Exception:
         traceback.print_exc()
         _post({"sender": job["sender"], "text": "Something went wrong reading that lot. Please send it again."})
