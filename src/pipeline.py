@@ -39,10 +39,11 @@ def counted_caption(prefix: str, expected: dict[str, int], boxed: dict[str, int]
     """The caption carries the reading's count; the boxes may be fewer when pieces are stacked."""
     plural = lambda n, g: f"{n} {g}" + ("" if n == 1 or g.endswith("s") else "s")
     text = prefix + ", ".join(plural(n, g) for g, n in expected.items())
-    if sum(v for g, v in boxed.items() if g != "stain") < sum(expected.values()):
+    pieces_boxed = sum(v for g, v in boxed.items() if g != "stain")
+    if 0 < pieces_boxed < sum(expected.values()):
         text += ". Stacked pieces share a box"
     if boxed.get("stain"):
-        text += f". Stains circled in red: {boxed['stain']}"
+        text += ". Damage circled in red"
     return text
 
 
@@ -67,9 +68,9 @@ def build_reply(photos: list[Path], words: str, work: Path) -> tuple[str, bytes,
 
     # The picture shows what the photo reading counted, no more, plus where the stains are.
     expected = {c.garment: c.seen for c in draft.checks if c.seen}
-    marks = 1 if any(i.get("issue") in ("stain", "discolouration") for i in damage.get("issues", [])) else 0
+    marks = [i["look_for"] for i in damage.get("issues", []) if i.get("look_for")]
     out = work / f"{photos[0].stem}-counted.jpg"
-    counts = counted_photo(photos[0], expected, out, stains=marks)
+    counts = counted_photo(photos[0], expected, out, marks=marks)
     caption = counted_caption("Counted at the counter: ", expected, counts)
 
     if customer:
