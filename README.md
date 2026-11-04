@@ -2,9 +2,11 @@
 
 **A laundry counter on WhatsApp, checked by Meta's models.**
 
-At a laundry counter in Kerala, staff photograph each customer's lot and say what is in it ("3 shirts, 1 pant, steam press, customer 98470 00000"). Paizah Counter reads the photo and the words separately with **Muse Spark** and **SAM 3.1**, compares them garment by garment, prices the lot from the laundry's own price list, records stains and tears before washing, and later checks the delivery photo against what came in. When the two readings agree, the quote is ready to send. When they disagree, staff are asked before anything reaches the customer.
+Laundry counters in India run on desktop or mobile billing software: staff count each customer's lot by hand and key it in. At **Prezr**, a laundry in Thiruvananthapuram, the counter moved onto WhatsApp: staff photograph the lot and say what is in it ("3 shirts, 1 pant, steam press, customer 98470 00000"). Paizah Counter turns that into a product any laundry can adopt, with the checks a counter needs.
 
-Built for **Prezr**, a laundry in Thiruvananthapuram, and tested against **111 real quotes** from its counter.
+It reads the photo and the words separately with **Muse Spark** and **SAM 3.1**, compares them garment by garment, prices the lot from the laundry's own price list, records stains and tears on the floor before washing, and later checks the delivery photo against what came in. When the two readings agree, the quote is ready to send. When they disagree, staff are asked before anything reaches the customer.
+
+Tested against **111 real quotes** from Prezr's counter.
 
 Entry for the Meta Global AI Developer Hackathon, startup track, theme **Build for Your World**.
 
@@ -27,7 +29,7 @@ Draft so far:
 Total Rs 65
 ```
 
-**2. Damage recorded before washing**
+**2. Damage recorded on the floor, before washing** (floor staff send the photo at inspection to the same number)
 
 ```
 Noted before washing (please check, and tell the customer):
