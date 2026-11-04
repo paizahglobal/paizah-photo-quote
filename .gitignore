@@ -7,3 +7,4 @@ __pycache__/
 .venv/
 .wa_token
 .verify_token
+submission/
