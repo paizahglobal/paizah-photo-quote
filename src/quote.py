@@ -32,7 +32,7 @@ Look at every piece for: stain, discolouration, fading, tear, hole, missing butt
 Report only what you can actually see. Creases, folds, shadows, prints, embroidery, checks and designs are NOT damage.
 Pieces photographed folded show only part of the garment; say so in "not_checked" rather than guessing about what is hidden.
 Reply with JSON only:
-{"issues": [{"piece": "<colour and garment, e.g. grey striped shirt>", "garment": "<garment>", "issue": "<stain|discolouration|fading|tear|hole|missing button|broken zip|loose seam|burn mark>", "where": "<where on the piece>", "confidence": <0..1>}],
+{"issues": [{"piece": "<colour and garment, e.g. grey striped shirt>", "garment": "<garment>", "issue": "<stain|discolouration|fading|tear|hole|missing button|broken zip|loose seam|burn mark>", "where": "<where on the piece>", "look_for": "<two or three words naming what is visible, by colour and shape, e.g. white mark, yellow patch, small hole>", "confidence": <0..1>}],
  "not_checked": "<what could not be seen, or empty>"}"""
 
 SERVICES = {"SP": "steam press", "DC": "dry clean", "W&SP": "wash and steam press", "W&F": "wash and fold",
@@ -156,9 +156,9 @@ def staff_message(d: Draft) -> str:
         return f"Photo agrees: {pieces}.\n" + "\n".join(rows) + f"\nTotal Rs {d.total:g}. Ready to send to the customer."
     out = []
     if seen_total < said_total:
-        out.append(f"You said {said_total} pieces, the photo shows {seen_total}. Send a photo of the rest, or correct the count.")
+        out.append(f"You said {said_total}, the photo shows {seen_total}. Send a photo of the rest, or correct the count.")
     elif seen_total > said_total:
-        out.append(f"You said {said_total} pieces, the photo shows {seen_total}. Which pieces are missing from your message?")
+        out.append(f"You said {said_total}, the photo shows {seen_total}. Which pieces are missing from your message?")
     for c in d.mismatches:
         out.append(f"- {c.garment}: you said {c.said}, photo shows {c.seen}")
     for u in d.unpriced:
